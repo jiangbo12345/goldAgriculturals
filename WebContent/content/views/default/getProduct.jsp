@@ -23,10 +23,10 @@
 <script src="content/static/js/goldJs/news.js"></script>
 <!---->
 <link href="content/static/css/goldCss/common.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css"
-	href="content/static/css/goldCss/nav_right.css" />
+
 <link href="content/static/css/goldCss/sub2_style.css" rel="stylesheet" />
 <link rel="stylesheet" href="content/static/css/goldCss/footer.css" />
+<link rel="stylesheet" href="content/static/css/goldCss/nav_right2.css" />
 <script type="text/javascript">
 $(document).ready(function () {
 	$(".main_visual").hover(function(){
@@ -81,8 +81,10 @@ $(document).ready(function () {
 			<li><a href="index.html#footer">联系信息</a></li>
 			<li><a href="index.html">首&nbsp;&nbsp;&nbsp;&nbsp;页</a></li>
 		</div>
+        
+        
 		<!-- 右侧导航栏 -->
-		<div  style="top:0; right:0; *position:fixed; width:75px; height:100%; position:absolute;">
+		<div >
   		<div class="mui-mbar-tabs">
     <div class="button_gnj" id="button_gnj"> <!--功能键按钮-->
       <li><img src="content/static/images/gnj.png" /></li>
@@ -94,9 +96,11 @@ $(document).ready(function () {
             <div class="ibar_login_box status_login">
               <div class="status_login">
                 <ul class="user_info">
+                <li style="z-index:9999;">
 					<c:forEach items="${brands }" var="brand">
 					<a href="getXiLie?id=${brand.id }">${brand.departmentname }</a>
 					</c:forEach>
+                </li>
                 </ul>
               </div>
             </div>
@@ -147,7 +151,7 @@ $(document).ready(function () {
 		<a href="index">
 			<div class="logo_icon"></div>
 		</a>
-		<jsp:include page="rightNav.jsp" />
+		
 		<div class="news"
 			style="height: 360px; top: 14%; *top: 114%; _position: absolute; *position: fixed;">
 			<li
@@ -226,8 +230,9 @@ $(document).ready(function () {
 							<a href="#"><img src="content/static/images/tel.jpg" /> </a>
 						</div></li>
 				</ul>
-				<a href="javascript:;" id="btn_prev"></a> <a href="javascript:;"
-					id="btn_next"></a>
+<!-- 				<a href="javascript:;" id="btn_prev"></a>  -->
+<!--                 <a href="javascript:;" -->
+<!-- 					id="btn_next"></a> -->
 			</div>
 		</div>
 		<div class="main_image_bg"></div>

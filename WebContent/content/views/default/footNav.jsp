@@ -5,9 +5,9 @@
 <footer class="slide" id="footer" style="background:#fff; width:100%; margin:0 auto; padding:0">
 	<!--左侧翻页效果-->
 	<div class="left" style=" position:absulate;"> 
-		<a  href="#fsvs-initial-setup" class="btu_top"></a> 
-		<a  href="#fsvs-initial-setup" class="home"></a>
-		 <a  href="#basic-html-setup" class="btu_buttom"></a>
+		<a  href="#stage1" class="btu_top"></a> 
+		<a  href="#stage1" class="home"></a>
+		 <a  href="#stage2" class="btu_buttom"></a>
  </div>
     <div class="f_top">
       <div class="f_box">
@@ -52,3 +52,4 @@
       </div>
     </div>
   </footer>
+  <script type="text/javascript" src="content/static/js/goldJs/zzsc.js"></script>

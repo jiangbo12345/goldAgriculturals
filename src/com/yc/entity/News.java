@@ -16,7 +16,7 @@ public class News {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer noticeId;
 
-	@Column(length=6000)
+	@Column(length=8000)
 	private String  content;
 	
 	@Column

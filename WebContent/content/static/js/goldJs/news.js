@@ -1,5 +1,5 @@
 // JavaScript Document
-//<!--新闻列表引用的Js-->
+<!--新闻列表引用的Js-->
     function news_contentupDiv(div_id) {   
         var div_obj = $("#"+div_id);  
         var windowWidth = document.body.clientWidth;    
@@ -21,9 +21,9 @@
     }    
     function hideDiv(div_id) {   
         $("#mask").remove();   
-        $("#" + div_id).animate({right: 0, top:"120%", opacity: "hide" }, "slow");  
+        $("#" + div_id).animate({right: 0, top: 150, opacity: "hide" }, "slow");  
     }  
-//<!--隐藏效果-->
+<!--隐藏效果-->
 $(function(){
 
     $('.click1').click(function(){
@@ -38,7 +38,11 @@ $('#close_bg').click(function(){
 });
 document.getElementById('news_content').onclick = EX.stop;
 var url = '#';
-
+function show(){
+var o = document.getElementById('news_content');
+o.style.display = "";
+setTimeout(function(){EX.addEvent.call(document,'click',hide);});
+}
 function hide(){
 var o = document.getElementById('news_content');
 o.style.display = "none";

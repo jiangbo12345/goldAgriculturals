@@ -10,7 +10,7 @@
 	height:10%;*/
 	margin: 0 auto;
 	padding:0;
-	position:fixed;
+	
 	text-align: center;
 	padding: 0px;
 	left:36%;
@@ -250,7 +250,7 @@ table {
 	width: 100%;
 	right: 0;
 	top: 0;
-	position:fixed;
+	position:absolute;
 	z-index: 9;
 	-webkit-transition: width linear .4s;
 	-moz-transition: width linear .4s;

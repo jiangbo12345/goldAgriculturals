@@ -176,7 +176,7 @@ filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1317', end
 }
 #focus_Box li img {
 	width: 90%;
-	background: url(images/loading.gif) no-repeat center 50%;
+	background: url(../../images/loading.gif) no-repeat center 50%;
 	height: 70%;
 	border-radius: 4px;
 	box-shadow: 1px 1px 12px rgba(200, 200, 200, 1);
