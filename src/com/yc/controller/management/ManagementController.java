@@ -1,5 +1,6 @@
 package com.yc.controller.management;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -201,6 +203,14 @@ public class ManagementController {
 					}
 				}
 				sortService.deleteSort(dep);
+			}
+		}
+		Set<Products> depAndPos = department.getProducts();
+		if (depAndPos != null && depAndPos.size() > 0) {
+			Iterator<Products> iterator = depAndPos.iterator();
+			while (iterator.hasNext()) {
+				Products depAndPoss = iterator.next();
+				productsService.delete(depAndPoss.getId());
 			}
 		}
 		sortService.deleteSort(department);

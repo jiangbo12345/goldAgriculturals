@@ -58,7 +58,7 @@
 			<div class="list-group-item">
 				<p class="list-group-item-text">
 					<br>
-					<form class="form-horizontal" id="form" name="form" 
+					<form class="form-horizontal" id="form" name="IUpload" 
 						method="POST"  enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">上级分类:</label>
@@ -68,7 +68,7 @@
 							<label class="col-sm-2 control-label">分类名称:</label> 
 							<label class="col-sm-2 control-label"><font color="red">${department.departmentname }</font></label>
 							<label class="col-sm-2 control-label">语言:</label> 
-							<label class="col-sm-2 control-label"><font color="red"><c:if test="${department.language =='Chinese' }">汉语</c:if><c:if test="${department.language =='Uighur' }">维语</c:if></font></label>
+							<label class="control-label"><font color="red"><c:if test="${department.language =='Chinese' }">汉语</c:if><c:if test="${department.language =='Uighur' }">维语</c:if></font></label>
 							<input id="departmentID" name="departmentID" value="${department.id }" type="hidden">
 							<input name="language" value="${department.language }" type="hidden">
 							<br>
@@ -104,14 +104,14 @@
 							<label for="inputEmail3" class="col-sm-2 control-label">
 								产品照片</label>
 							<div class="col-sm-8">
-								<input name="sendFile" type="file" class="form-control">
+								<input name="sendFile" type="file" class="form-control" size="40" maxlength="40" onchange="xilieView(this);">
 								<br>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">
 								</label>
-							<div class="col-sm-8">
+							<div class="col-sm-8" id="xilie">
 								<img alt="" src="..${products.productsPhoto }" >
 								<br>
 							</div>
@@ -120,14 +120,14 @@
 							<label for="inputEmail3" class="col-sm-2 control-label">
 								品牌照片</label>
 							<div class="col-sm-8">
-								<input name="brandFile" type="file" class="form-control">
+								<input name="brandFile" type="file" class="form-control" onchange="brandView(this);">
 								<br>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">
 								</label>
-							<div class="col-sm-8">
+							<div class="col-sm-8" id="brand">
 								<img alt="" src="..${products.brand }" >
 								<br>
 							</div>
@@ -153,7 +153,7 @@
 								</label>
 							<div class="col-sm-8">
 								<c:forEach items="${products.recommends }" var="recommend">
-									<img alt="" src="..${recommend }" >
+									<img alt="" src="..${recommend }" name="xilie" >
 								</c:forEach>
 							</div>
 						</div>
@@ -167,6 +167,86 @@
 			</div>
 		</div>
 	</div>
+	<script> 
+   function xilieView(imgFile) 
+   { 
+    var pattern = /(\.*.jpg$)|(\.*.png$)|(\.*.jpeg$)|(\.*.gif$)|(\.*.bmp$)/;      
+    if(!pattern.test(imgFile.value)) 
+    { 
+     alert("系统仅支持jpg/jpeg/png/gif/bmp格式的照片！");  
+     imgFile.focus(); 
+    } 
+    else 
+    { 
+     var path; 
+     if(document.all)//IE 
+     { 
+      imgFile.select(); 
+      path = document.selection.createRange().text; 
+      document.getElementById("xilie").innerHTML=""; 
+      document.getElementById("xilie").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果 
+     } 
+     else//FF 
+     { 
+      path = URL.createObjectURL(imgFile.files[0]);
+      alert(path);
+      document.getElementById("xilie").innerHTML = "<img name='xiliePhoto' src='"+path+"'/>"; 
+     } 
+    } 
+   } 
+   function xilieExceedSize(w,h){
+		if(!document.IUpload.sendFile.value==""){
+			if(xiliePhoto.width >w||xiliePhoto.height >h){
+				alert("图像尺寸："+xiliePhoto.width+"X"+xiliePhoto.height+"。\\n图像尺寸过大！你只能上传尺寸为 "+w+"×"+h+"的图像，请重新浏览图片！");
+				document.getElementById("xilie").innerHTML = "";
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return true;
+		}
+	}
+   
+   function brandView(imgFile) 
+   { 
+    var pattern = /(\.*.jpg$)|(\.*.png$)|(\.*.jpeg$)|(\.*.gif$)|(\.*.bmp$)/;      
+    if(!pattern.test(imgFile.value)) 
+    { 
+     alert("系统仅支持jpg/jpeg/png/gif/bmp格式的照片！");  
+     imgFile.focus(); 
+    } 
+    else 
+    { 
+     var path; 
+     if(document.all)//IE 
+     { 
+      imgFile.select(); 
+      path = document.selection.createRange().text; 
+      document.getElementById("brand").innerHTML=""; 
+      document.getElementById("brand").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果 
+     } 
+     else//FF 
+     { 
+      path = URL.createObjectURL(imgFile.files[0]);
+      document.getElementById("brand").innerHTML = "<img name='brandPhoto' src='"+path+"'/>"; 
+     } 
+    } 
+   } 
+   function brandExceedSize(w,h){
+		if(!document.IUpload.brandFile.value==""){
+			if(brandPhoto.width !=w||brandPhoto.height !=h){
+				alert("图像尺寸："+brandPhoto.width+"X"+brandPhoto.height+"。\\n图像尺寸过大！你只能上传尺寸为 "+w+"×"+h+"的图像，请重新浏览图片！");
+				document.getElementById("brand").innerHTML = "";
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return true;
+		}
+	}
+  </script>
 	<script type="text/javascript">
 	j = 1;
 	$(document)
@@ -199,9 +279,15 @@
 					+ "&page=addProducts";
 		}
 		function updateDepartmen() {
-			document.form.action="./addProducts";
-			document.form.submit();
-			return closeAndRefresh();
+			var xilieok = xilieExceedSize(540,341);
+	 		var brandok=brandExceedSize(300,270);
+			if(xilieok && brandok){
+				document.IUpload.reset();
+			}else{
+				document.IUpload.action="./addProducts";
+				document.IUpload.submit();
+				return closeAndRefresh();
+			}
 		}
 		function refreshParent() {
 			window.opener.location.reload();

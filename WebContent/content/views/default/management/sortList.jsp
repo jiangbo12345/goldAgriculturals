@@ -71,7 +71,7 @@
 			<div class="list-group-item">
 				<p class="list-group-item-text">
 					<br>
-					<form class="form-horizontal" action="./addOrUpdateDep"  id="form" name="form" 
+					<form class="form-horizontal"  name="IUpload" action="./addOrUpdateDep"  id="form" 
 						method="POST"  enctype="multipart/form-data">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">上级分类:</label>
@@ -102,23 +102,23 @@
 							<label for="inputEmail3" class="col-sm-2 control-label">
 								分类照片</label>
 							<div class="col-sm-8">
-								<input name="sendFile" type="file">
+								<input name="sendFile" type="file"  size="40" maxlength="40" onchange="PreviewImage(this);">
 								<br>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">
 								</label>
-							<div class="col-sm-8">
+							<div class="col-sm-8" id="imgPreview">
 								<img alt="" src="..${department.describes }" >
 								<br>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-8" style="text-align: center;">
-								<button type="submit" class="btn btn-default">添加下级分类</button>
+								<button type="button" id="btn_upload" onclick="detect();" class="btn btn-default">添加下级分类</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-default" onclick="updateDepartmen();">修改此分类</button>
+								<button type="button" id="btn_upload2" class="btn btn-default" onclick="updateDepartmen();">修改此分类</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button type="button" class="btn btn-default" onclick="deleteDepartmen();">删除此分类</button>
 							</div>
@@ -128,17 +128,71 @@
 			</div>
 		</div>
 	</div>
+<script> 
+   function PreviewImage(imgFile) 
+   { 
+    var pattern = /(\.*.jpg$)|(\.*.png$)|(\.*.jpeg$)|(\.*.gif$)|(\.*.bmp$)/;      
+    if(!pattern.test(imgFile.value)) 
+    { 
+     alert("系统仅支持jpg/jpeg/png/gif/bmp格式的照片！");  
+     imgFile.focus(); 
+    } 
+    else 
+    { 
+     var path; 
+     if(document.all)//IE 
+     { 
+      imgFile.select(); 
+      path = document.selection.createRange().text; 
+      document.getElementById("imgPreview").innerHTML=""; 
+      document.getElementById("imgPreview").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果 
+     } 
+     else//FF 
+     { 
+      path = URL.createObjectURL(imgFile.files[0]);
+      document.getElementById("imgPreview").innerHTML = "<img name='picshow' src='"+path+"'/>"; 
+     } 
+    } 
+   } 
+   function imgExceedSize(w,h){
+		if(!document.IUpload.sendFile.value==""){
+			if(picshow.width !=w||picshow.height !=h){
+				alert("图像尺寸："+picshow.width+"X"+picshow.height+"。\\n图像尺寸过大！你只能上传尺寸为 "+w+"×"+h+"的图像，请重新浏览图片！");
+				document.getElementById("imgPreview").innerHTML = "";
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return true;
+		}
+	}
+	
+	function detect(){
+		var ok=imgExceedSize(380,440);
+		if(ok){
+			document.IUpload.reset();
+		}else{
+			document.IUpload.submit();
+		}
+	}
+  </script> 
 	<script type="text/javascript">
 		function onclickID(id) {
 			location.href = './getAgriculturalsSort?id=' + id+"&page=sortList";
 		}
 		function updateDepartmen(){
-			document.form.action="./updateDepartmen?departmentId="+$('#departmentID').val();
-			document.form.submit();
+			var ok=imgExceedSize(380,440);
+			if(ok){
+				document.IUpload.reset();
+			}else{
+				document.IUpload.action="./updateDepartmen?departmentId="+$('#departmentID').val();
+				document.IUpload.submit();
+			}
 		}
 		function deleteDepartmen(){
-			document.form.action="./deleteDepartmen?departmentId="+$('#departmentID').val();
-			document.form.submit();
+			document.IUpload.action="./deleteDepartmen?departmentId="+$('#departmentID').val();
+			document.IUpload.submit();
 		}
 		$(function() {
 			$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr(
