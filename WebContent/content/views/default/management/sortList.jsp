@@ -95,7 +95,7 @@
 							<div class="col-sm-8">
 							<input id="departmentID" name="departmentID" value="${department.id }" type="hidden">
 								<input name="departmentname" class="form-control"
-									value="${department.departmentname }"> <br>
+									value="${department.departmentname }"> <br>380x440
 							</div>
 						</div>
 						<div class="form-group">

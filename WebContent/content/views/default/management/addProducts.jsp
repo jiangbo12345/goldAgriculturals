@@ -105,7 +105,7 @@
 								产品照片</label>
 							<div class="col-sm-8">
 								<input name="sendFile" type="file" class="form-control" size="40" maxlength="40" onchange="xilieView(this);">
-								<br>
+								<br>540x341
 							</div>
 						</div>
 						<div class="form-group">
@@ -121,7 +121,7 @@
 								品牌照片</label>
 							<div class="col-sm-8">
 								<input name="brandFile" type="file" class="form-control" onchange="brandView(this);">
-								<br>
+								<br>300,270
 							</div>
 						</div>
 						<div class="form-group">
@@ -137,7 +137,7 @@
 								推荐照片</label>
 							<div class="col-sm-8">
 								<input name="file" type="file" class="form-control">
-								<br>
+								<br>245x164
 							</div>
 						</div>
 						<div id="newUpload2"></div>
@@ -189,7 +189,6 @@
      else//FF 
      { 
       path = URL.createObjectURL(imgFile.files[0]);
-      alert(path);
       document.getElementById("xilie").innerHTML = "<img name='xiliePhoto' src='"+path+"'/>"; 
      } 
     } 
@@ -257,7 +256,7 @@
 										function() {
 											document
 													.getElementById("newUpload2").innerHTML += '<div id="div_'+j+'" class="form-group"><label for="inputEmail3" class="col-sm-2 control-label"></label><div class="col-sm-8"><input  name="file_'+j+'" type="file" class="form-control" /><input type="button"  style="width: 56px; height: 35px;" value="删除"  onclick="del_2('
-													+ j + ')"/></div></div>';
+													+ j + ')"/>245x164</div></div>';
 											j = j + 1;
 										});
 					});

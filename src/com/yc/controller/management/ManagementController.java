@@ -1,6 +1,5 @@
 package com.yc.controller.management;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -316,6 +314,7 @@ public class ManagementController {
 				}
 				products.setAgriculturalsSort(sort);
 				products = productsService.update(products);
+				sort.getProducts().add(products);
 				mode.put("products", products);
 			}
 		}

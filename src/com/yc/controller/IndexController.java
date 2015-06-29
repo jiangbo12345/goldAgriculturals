@@ -143,4 +143,32 @@ public class IndexController {
 		}
  	}
  	
+ 	@RequestMapping(value = "getzz", method = RequestMethod.GET)
+	public ModelAndView getzz(Integer param, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		AgriculturalsSort agriculturals = sortService.findById(param);
+ 		ModelMap mode = new ModelMap();
+ 		mode.put("agriculturals", agriculturals);
+ 		Object language = request.getSession().getAttribute("language");
+    	if (language == null) {
+    		language = "Chinese";
+			request.getSession().setAttribute("language", "Chinese");
+		}
+    	List<AgriculturalsSort> list = sortService.getSortByParent(Language.valueOf(language.toString()));
+    	List<News> news = newsService.getNewsByLangage(Language.valueOf(language.toString()));
+    	List<AgriculturalsSort> brands = new ArrayList<AgriculturalsSort>();
+    	for (int i = 0; i < list.size(); i++) {
+    		if (list.get(i).getParentLevel() == null) {
+				Set<AgriculturalsSort> chile = list.get(i).getChildren();
+				Iterator<AgriculturalsSort> set = chile.iterator();
+				while(set.hasNext()){
+					brands.add(set.next());
+				}
+			}
+		}
+    	mode.put("list", list);
+    	mode.put("news", news);
+    	mode.put("brands", brands);
+ 		return new ModelAndView("getzz",mode);
+	}
+ 	
 }
